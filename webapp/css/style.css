@@ -1,0 +1,14 @@
+/* Enter your custom styles here */
+.ColorBack > div > div > div {
+  background: white;
+}
+/* .sapUiCalItemTypeNonWorking {
+  filter: blur(2px);
+  opacity: 0.5;
+  pointer-events: none; 
+} */
+.sapUiCalItemTypeNonWorking {
+  opacity: 0.4;
+  filter: blur(1px);
+  pointer-events: none !important;
+}

@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+    <Dialog id="modifyDialog" title="Title">
+        <beginButton>
+            <Button text="OK" type="Emphasized" press="handleDialogOkButton"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="handleDialogCancelButton"/>
+        </endButton>
+        <l:VerticalLayout class="sapUiContentPadding" width="100%">
+            <f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+                    <Label text="Tipo trasferta" />
+                    <Select forceSelection="false" editable="{modello>/edit}" selectedKey="{modello>/tipotrasfertakey}" selectedItem="{modello>/tipo_trasferta}" required="{modello>/required}">
+                        <core:Item text="Trasferta Dirigenti Italia" key="TrasfertaDirigenteItalia" />
+                        <core:Item text="Trasferta Dirigenti Estero" key="TrasfertaDirigenteEstero" />
+                    </Select>
+                    <Label text="" />
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" width="100%">
+                        <VBox >
+                            <Label text="Inizio Validità" required="{modello>/required}"/>
+                            <DatePicker editable="{modello>/edit}" value="{modello>/data_inizio}" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Inizio Validità" change="handleChange" class="sapUiSmallMarginBottom" />
+                        </VBox>
+                        <VBox >
+                            <Label text="Fine Validità" required="{modello>/required}"/>
+                            <DatePicker editable="{modello>/edit}" value="{modello>/data_fine}" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Fine Validità" change="handleChange" class="sapUiSmallMarginBottom"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="" />
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" width="100%">
+                        <VBox >
+                            <Label text="Ora Inizio" required="{modello>/required}"/>
+                            <TimePicker editable="{modello>/edit}" value="{modello>/ora_inizio}" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" maskMode="On"/>
+                        </VBox>
+                        <VBox >
+                            <Label text="Ora Fine" required="{modello>/required}"/>
+                            <TimePicker editable="{modello>/edit}" value="{modello>/ora_fine}" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" maskMode="On" />
+                        </VBox>
+                    </HBox>
+                    <Label text="Note" />
+                    <TextArea width="300px" editable="{modello>/edit}" value="{modello>/note}" height="100px" rows="8" />
+                </f:content>
+            </f:SimpleForm>
+        </l:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

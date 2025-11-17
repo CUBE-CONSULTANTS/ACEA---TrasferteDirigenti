@@ -1,0 +1,78 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+    <l:Splitter >
+
+        <table:Table id="tableRiepilogo" rows="{/appointments}" rowMode="Auto" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange=".onSetEdit">
+            <table:layoutData>
+                <l:SplitterLayoutData size="70%" resizable="false" />
+            </table:layoutData>
+            <table:extension>
+                <OverflowToolbar >
+                    <ToolbarSpacer/>
+                    <Button text="Modifica" icon="sap-icon://edit" press=".onChange"/>
+                    <Button text="Elimina" icon="sap-icon://delete" type="Emphasized" press=".onDelete"/>
+                </OverflowToolbar>
+            </table:extension>
+            <table:rowSettingsTemplate>
+                <table:RowSettings highlight="{Status}" highlightText="{StatusText}"/>
+            </table:rowSettingsTemplate>
+            <table:columns>
+                <table:Column sortProperty="Status" filterProperty="Status">
+                    <Label text="Tipo Trasferta"/>
+                    <table:template>
+                        <Text text="{=${title} === 'Trasferta Dirigente Estero' ? 'AT4' : 'AT2'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column>
+                    <Label text="Descr. tipo trasferta"/>
+                    <table:template>
+                        <Text text="{title}" wrapping="true"/>
+                    </table:template>
+                </table:Column>
+                <table:Column>
+                    <Label text="Inizio"/>
+                    <table:template>
+                        <Text text="{
+                            path:'startDate',
+                            formatter: '.formatter.formatDate'
+                        }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column hAlign="Left">
+                    <Label text="Fine"/>
+                    <table:template>
+                        <Text text="{
+                            path:'endDate',
+                             formatter: '.formatter.formatDate'
+                        }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column hAlign="Left">
+                    <Label text="Ora inizio"/>
+                    <table:template>
+                        <Text text="{
+                            path:'startDate',
+                            formatter: '.formatter.formatTime'
+                        }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column hAlign="Left">
+                    <Label text="Ora fine"/>
+                    <table:template>
+                        <Text text="{
+                            path: 'endDate',
+                            formatter: '.formatter.formatTime'
+                        }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+        <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.FormTrasferta" type="XML" />
+    </l:Splitter>
+</core:FragmentDefinition>

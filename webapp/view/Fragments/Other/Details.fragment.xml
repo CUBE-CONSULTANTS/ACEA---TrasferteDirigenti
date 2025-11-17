@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <ResponsivePopover id="detailsPopover" title="{title}" class="sapUiResponsivePadding--header" placement="Auto">
+        <beginButton>
+            <Button text="Edit" tooltip="Modifica Trasferta" type="Emphasized" press="handleEditButton"/>
+        </beginButton>
+        <endButton>
+            <Button text="Delete" tooltip="Cancella Trasferta" press="handlePopoverDeleteButton"/>
+        </endButton>
+        <f:SimpleForm editable="false" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+            <Label text="Data e Ora inizio" labelFor="startDateText"/>
+            <Text text="{
+						path: 'startDate',
+						formatter:'.formatDate'
+					}"/>
+            <Label text="Data e Ora fine" />
+            <Text text="{
+						path: 'endDate',
+						formatter:'.formatDate'
+					}"/>
+            <Label text="Note" />
+            <Text text="{text}"/>
+        </f:SimpleForm>
+    </ResponsivePopover>
+</core:FragmentDefinition>

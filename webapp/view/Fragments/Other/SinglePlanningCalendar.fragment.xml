@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+    <l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding ColorBack" sideContentVisibility="AlwaysShow" showSideContent="{path: 'stateModel>/legendShown'}" containerQuery="true">
+        <VBox >
+            <SinglePlanningCalendar id="SPC1"  appointmentSelect="handleAppointmentSelect" headerDateSelect="handleHeaderDateSelect" startDateChange="handleStartDateChange" class="sapUiSmallMarginTop" title= "Inserimento periodo di trasferta" cellPress=".onCellPress" startDate="{path: '/startDate'}" stickyMode="NavBarAndColHeaders" appointments="{path: '/appointments'}">
+                <specialDates>
+                    <unified:DateTypeRange type="NonWorking" startDate="{path: '/Holidays'}">
+                    </unified:DateTypeRange>
+                </specialDates>
+                <views>
+                    <SinglePlanningCalendarMonthView key="MonthView" title="Mese" />
+                    <SinglePlanningCalendarWeekView key="WeekView" title="Settimana" />
+
+                </views>
+                <actions>
+                    <ToggleButton pressed="{path: 'stateModel>/legendShown'}" icon="sap-icon://legend" tooltip="Legenda"/>
+                    <Button text="Create" press="handleAppointmentCreate" type="Emphasized" icon="sap-icon://edit" tooltip="Crea nuova trasferta" />
+                </actions>
+                <appointments>
+                    <unified:CalendarAppointment title= "{title}" text= "{text}" type= "{type}" icon= "{icon}" startDate= "{startDate}" endDate= "{endDate}">
+                    </unified:CalendarAppointment>
+                </appointments>
+            </SinglePlanningCalendar>
+        </VBox>
+        <l:sideContent >
+            <PlanningCalendarLegend id="SinglePlanningCalendarLegend" items="{path : '/legendItems', templateShareable: true}" appointmentItems="{path : '/legendAppointmentItems',
+									templateShareable: true}" class="sapUiSmallMarginTop">
+                <items>
+                    <unified:CalendarLegendItem text="{text}" type="{type}" color="{color}" tooltip="{text}" />
+                </items>
+                <appointmentItems>
+                    <unified:CalendarLegendItem text="{text}" type="{type}" tooltip="{text}" />
+                </appointmentItems>
+            </PlanningCalendarLegend>
+        </l:sideContent>
+    </l:DynamicSideContent>
+
+</core:FragmentDefinition>

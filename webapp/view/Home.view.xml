@@ -1,0 +1,44 @@
+<mvc:View controllerName="trasfertedirigenti.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m">
+    <f:DynamicPage class="ColorBack" headerExpanded="true" toggleHeaderOnTitleClick="false" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Trasferte Dirigenti"/>
+                </f:heading>
+                <f:actions>
+                    <Image src="{
+                                value: 'trasfertedirigenti/public/LOGO_ATOH.png',
+                                formatter: 'sap.ui.require.toUrl'
+                            }" width="80px" class="sapUiTinyMarginStart"/>
+                </f:actions>
+
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <layout:HorizontalLayout allowWrapping="false">
+                    <SegmentedButton selectedKey="nuova" class="sapUiSmallMarginBottom" selectionChange=".onChangeFragment">
+                        <items>
+                            <SegmentedButtonItem text="Nuova Trasferta" key="NuovaTrasferta" width="150px"/>
+                            <SegmentedButtonItem text="Riepilogo Trasferte" key="RiepilogoTrasferte" width="150px"/>
+                        </items>
+                    </SegmentedButton>
+                </layout:HorizontalLayout>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+
+        </f:content>
+        <f:footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <Button text="Planning Calendar" icon="sap-icon://calendar" type="Attention" press=".onNavOther"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

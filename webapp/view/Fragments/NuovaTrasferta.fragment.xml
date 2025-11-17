@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <l:HorizontalLayout class="sapUiContentPadding">
+        <u:Calendar id="calendar" startDateChange=".onChangeDateCalendar" showCurrentDateButton="true" nonWorkingDays="0,6" disabledDates="{path: '/disabled'}" months="2" showWeekNumbers="false" singleSelection="true" select="handleCalendarSelect">
+            <u:disabledDates>
+                <u:DateRange startDate="{start}" endDate="{end}"/>
+            </u:disabledDates>
+        </u:Calendar>
+        <l:VerticalLayout >
+            <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.FormTrasferta" type="XML" />
+
+        </l:VerticalLayout>
+    </l:HorizontalLayout>
+</core:FragmentDefinition>
