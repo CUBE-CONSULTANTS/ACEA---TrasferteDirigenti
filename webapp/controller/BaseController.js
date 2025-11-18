@@ -46,13 +46,17 @@ sap.ui.define([
             },
             holidays: async function (year = "2025") {
                 const api = "B34olFqRKklQ069YrjZ8NOesv9iz4tWO";
-                return await fetch(`https://calendarific.com/api/v2/holidays?api_key=${api}&country=IT&year=${year}`)
-                    .then(response => response.json())
-                    .then(data =>
-                        data.response.holidays.map(x => x.date).map(x => x.datetime)
-                    )
-                    .catch(err => console.error(err));
-
+                try {
+                    return await fetch(`https://calendarific.com/api/v2/holidays?api_key=${api}&country=IT&year=${year}`)
+                        .then(response => response.json())
+                        .then(data =>
+                            data.response.holidays.map(x => x.date).map(x => x.datetime)
+                        )
+                     
+                }
+                catch(err){
+                    return []
+                }
 
             },
             createModel: function ({ tipo_trasferta = null, tipotrasfertakey = null, data_inizio = null, data_fine = null, ora_inizio = null,
