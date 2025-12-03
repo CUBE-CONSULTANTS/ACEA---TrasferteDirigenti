@@ -16,7 +16,7 @@
     </l:Splitter> -->
     <l:ResponsiveSplitter defaultPane="default">
         <l:PaneContainer>
-            <l:SplitPane requiredParentWidth="800">
+            <l:SplitPane requiredParentWidth="600">
                 <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.TableRiepilogo" type="XML" />
             </l:SplitPane>
             <l:SplitPane id="default" requiredParentWidth="400">
