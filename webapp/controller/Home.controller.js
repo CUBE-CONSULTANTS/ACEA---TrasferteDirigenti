@@ -133,9 +133,6 @@ sap.ui.define([
 
             this._oDialog.open();
         },
-        handleCalendarSelect: function (oEvent) {
-            debugger
-        },
         ///Prova
         onNavOther: function () {
             const oRouter = this.getOwnerComponent().getRouter();

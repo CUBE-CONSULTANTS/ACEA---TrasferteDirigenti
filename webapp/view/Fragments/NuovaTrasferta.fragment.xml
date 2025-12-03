@@ -5,17 +5,36 @@
     xmlns:u="sap.ui.unified"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
-   
-        <u:Calendar id="calendar" width="100%" startDateChange=".onChangeDateCalendar"
-            showCurrentDateButton="true" nonWorkingDays="0,6" disabledDates="{path: '/disabled'}"
-            months="2" showWeekNumbers="false" singleSelection="true" select="handleCalendarSelect">
+    <VBox width="100%" class="sapUiSmallMarginTop">
+        <u:Calendar id="calendar" width="100%" startDateChange=".onChangeDateCalendar" showCurrentDateButton="true" nonWorkingDays="0,6" disabledDates="{path: '/disabled'}" months="2" showWeekNumbers="false" singleSelection="true" select="handleCalendarSelect">
             <u:disabledDates>
                 <u:DateRange startDate="{start}" endDate="{end}" />
             </u:disabledDates>
         </u:Calendar>
-        <!-- <VBox width="auto">
-            <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.FormTrasferta" type="XML" />
+        <!-- Form Creazione Trasferta -->
+        <f:SimpleForm editable="false" layout="ColumnLayout" title="Inserimento Trasferta">
+            <f:content>
+                <Label text="Tipo Trasferta" />
+                <Select forceSelection="false" editable="{modello>/edit}" selectedKey="{modello>/tipotrasfertakey}" selectedItem="{modello>/tipo_trasferta}" required="{modello>/required}">
+                    <core:Item text="Trasferta Dirigenti Italia" key="TrasfertaDirigenteItalia" />
+                    <core:Item text="Trasferta Dirigenti Estero" key="TrasfertaDirigenteEstero" />
+                </Select>
+                <Label text="Inizio Validità" />
+                <DatePicker editable="{modello>/edit}" value="{modello>/data_inizio}" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Inizio Validità" change="handleChange" class="sapUiSmallMarginBottom" />
+                <Label text="Fine Validità" />
+                <DatePicker editable="{modello>/edit}" value="{modello>/data_fine}" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Fine Validità" change="handleChange" class="sapUiSmallMarginBottom"/>
+                <Label text="Ora Inizio" />
+                <TimePicker editable="{modello>/edit}" value="{modello>/ora_inizio}" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" maskMode="On"/>
+                <Label text="Ora Fine" />
+                <TimePicker editable="{modello>/edit}" value="{modello>/ora_fine}" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" maskMode="On" />
+                <Label text="Note" />
+                <TextArea editable="{modello>/edit}" value="{modello>/note}" height="100px" rows="8" />
 
-        </VBox>
-    </FlexBox> -->
+                <Label text=" " visible="false"/>
+                <Button text="Invia" type="Emphasized" icon="sap-icon://save" enabled="{modello>/edit}" press=".onSaveChange"/>
+
+            </f:content>
+        </f:SimpleForm>
+    </VBox>
+
 </core:FragmentDefinition>
