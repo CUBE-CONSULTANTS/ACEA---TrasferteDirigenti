@@ -6,57 +6,52 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:table="sap.ui.table">
-    <table:Table  rows="{modello>/table}" rowMode="Auto" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange=".onSetEdit">
-        <table:layoutData>
+    <Table items="{modello>/table}" mode="SingleSelectLeft" selectionChange=".onSetEdit">
+        <layoutData>
             <l:SplitterLayoutData size="70%" resizable="false" />
-        </table:layoutData>
-        <table:extension>
-            <OverflowToolbar >
+        </layoutData>
+
+        <headerToolbar>
+            <OverflowToolbar>
                 <ToolbarSpacer/>
                 <Button text="Modifica" icon="sap-icon://edit" press=".onChange"/>
                 <Button text="Elimina" icon="sap-icon://delete" type="Emphasized"/>
             </OverflowToolbar>
-        </table:extension>
-        <table:rowSettingsTemplate>
-            <table:RowSettings highlight="{Status}" highlightText="{StatusText}"/>
-        </table:rowSettingsTemplate>
-        <table:columns>
-            <table:Column sortProperty="Status" filterProperty="Status">
-                <Label text="Tipo Trasferta"/>
-                <table:template>
-                    <Text text="{modello>type_trasferta}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column>
-                <Label text="Descr. tipo trasferta"/>
-                <table:template>
-                    <Text text="{modello>tipo_trasferta}" wrapping="true"/>
-                </table:template>
-            </table:Column>
-            <table:Column>
-                <Label text="Inizio"/>
-                <table:template>
-                    <Text text="{modello>data_inizio}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column hAlign="Left">
-                <Label text="Fine"/>
-                <table:template>
-                    <Text text="{modello>data_fine}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column hAlign="Left">
-                <Label text="Ora inizio"/>
-                <table:template>
-                    <Text text="{modello>ora_inizio}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column hAlign="Left">
-                <Label text="Ora fine"/>
-                <table:template>
-                    <Text text="{modello>ora_fine}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-        </table:columns>
-    </table:Table>
+        </headerToolbar>
+
+        <columns>
+            <Column width="12em">
+                <Text text="Tipo Trasferta" />
+            </Column>
+            <Column minScreenWidth="Tablet" demandPopin="true">
+                <Text text="Descr. tipo trasferta" />
+            </Column>
+            <Column minScreenWidth="Desktop" demandPopin="true">
+                <Text text="Inizio" />
+            </Column>
+            <Column minScreenWidth="Desktop" demandPopin="true">
+                <Text text="Fine" />
+            </Column>
+            <Column minScreenWidth="Desktop" demandPopin="true">
+                <Text text="Ora inizio" />
+            </Column>
+            <Column minScreenWidth="Desktop" demandPopin="true">
+                <Text text="Ora fine" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <Text text="{modello>type_trasferta}" />
+                    <Text text="{modello>tipo_trasferta}" />
+                    <Text text="{modello>data_inizio}" />
+                    <Text text="{modello>data_fine}" />
+                    <Text text="{modello>ora_inizio}" />
+                    <Text text="{modello>ora_fine}" />
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
 </core:FragmentDefinition>

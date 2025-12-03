@@ -72,19 +72,26 @@ sap.ui.define([
 
         },
         onSetEdit: function (oEvent) {
-            const index_selected = oEvent.getSource().getSelectedIndex()
-            if (index_selected >= 0) {
-                const obj_selected = oEvent.getSource().getRows()[index_selected].getBindingContext("modello").getObject()
-                this.createModel({ ...obj_selected, edit: false, required: false })
+            debugger
+            const bSelected = oEvent.getParameter("selected");
+            if (bSelected) {
+                const oItem = oEvent.getParameter("listItem");
+                const obj_selected = oItem.getBindingContext("modello").getObject();
+
+                this.createModel({
+                    ...obj_selected,
+                    edit: false,
+                    required: false
+                });
             } else {
                 this.createModel({ edit: false, required: false })
             }
         },
         onChange: function (oEvent) {
             const table = oEvent.getSource()?.getParent()?.getParent()
-            let itemSelected = table?.getSelectedIndex()
+            let itemSelected = table?.getSelectedItems().length
             if (itemSelected >= 0) {
-                const obj_selected = table.getRows()[itemSelected].getBindingContext("modello").getObject()
+                const obj_selected = table.getSelectedItem().getBindingContext("modello").getObject()
                 this.createModel({ ...obj_selected, edit: true, required: true })
             }
         },

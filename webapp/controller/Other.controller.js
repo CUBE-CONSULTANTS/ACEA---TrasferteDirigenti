@@ -344,9 +344,9 @@ sap.ui.define([
                 else this.createModel({ edit: false, required: false })
             },
             onSetEdit: function (oEvent) {
-                const index_selected = oEvent.getSource().getSelectedIndex()
+                const index_selected = oEvent.getSource().getSelectedItems().length
                 if (index_selected >= 0) {
-                    const obj_selected = oEvent.getSource().getRows()[index_selected].getBindingContext().getObject()
+                    const obj_selected = oEvent.getSource().getSelectedItem().getBindingContext().getObject()
                     const viewObj = {
                         tipotrasfertakey: obj_selected.title.replaceAll(" ", ""),
                         data_inizio: this._formatStartDate(obj_selected.startDate),
@@ -364,10 +364,10 @@ sap.ui.define([
             },
             onChange: function (oEvent) {
                 const oTable = oEvent.getSource().getParent().getParent(),
-                    index_selected = oTable.getSelectedIndex()
+                    index_selected = oTable.getSelectedItems().length
                 if (index_selected >= 0) {
-                    const obj_selected = oTable.getRows()[index_selected].getBindingContext().getObject()
-                    const { sPath } = oTable.getRows()[index_selected].getBindingContext()
+                    const obj_selected = oTable.getSelectedItem().getBindingContext().getObject()
+                    const { sPath } = oTable.getSelectedItem().getBindingContext()
                     const viewObj = {
                         tipotrasfertakey: obj_selected.title.replaceAll(" ", ""),
                         data_inizio: this._formatStartDate(obj_selected.startDate),
@@ -392,7 +392,7 @@ sap.ui.define([
             onDelete: function (oEvent) {
                 const oTable = oEvent.getSource().getParent().getParent(),
                     oModel = this.getView().getModel()
-                const elementSelected = oTable.getRows()[oTable.getSelectedIndex()].getBindingContext()
+                const elementSelected = oTable.getSelectedItem().getBindingContext()
                 let { sPath } = elementSelected
                 MessageBox.confirm("Sei sicuro di voler cancellare?", {
                     actions: [MessageBox.Action.YES, MessageBox.Action.CLOSE],
