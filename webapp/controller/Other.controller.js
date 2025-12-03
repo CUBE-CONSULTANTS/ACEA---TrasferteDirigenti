@@ -407,7 +407,8 @@ sap.ui.define([
                     },
                     dependentOn: this.getView()
                 });
-            }
+            },
+            
 
         });
     });

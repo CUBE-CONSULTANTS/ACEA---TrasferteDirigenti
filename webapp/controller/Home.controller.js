@@ -32,6 +32,7 @@ sap.ui.define([
 
 
         onChangeDateCalendar: async function (oEvent) {
+            debugger
             let year = oEvent.getSource().getStartDate().getFullYear()
             const day = await this.holidays(year)
             var oModel = new sap.ui.model.json.JSONModel();
@@ -72,17 +73,19 @@ sap.ui.define([
 
         },
         onSetEdit: function (oEvent) {
-            debugger
             const bSelected = oEvent.getParameter("selected");
             if (bSelected) {
                 const oItem = oEvent.getParameter("listItem");
                 const obj_selected = oItem.getBindingContext("modello").getObject();
 
-                this.createModel({
-                    ...obj_selected,
-                    edit: false,
-                    required: false
-                });
+                this.getView().getModel("modello").setProperty("/tipotrasfertakey", obj_selected.tipotrasfertakey,)
+                this.getView().getModel("modello").setProperty("/data_inizio", obj_selected.data_inizio.replaceAll("-", "/"))
+                this.getView().getModel("modello").setProperty("/data_fine", obj_selected.data_fine.replaceAll("-", "/"))
+                this.getView().getModel("modello").setProperty("/ora_inizio", obj_selected.ora_inizio)
+                this.getView().getModel("modello").setProperty("/ora_fine", obj_selected.ora_fine)
+                this.getView().getModel("modello").setProperty("/nome", obj_selected.text)
+
+
             } else {
                 this.createModel({ edit: false, required: false })
             }
@@ -91,9 +94,47 @@ sap.ui.define([
             const table = oEvent.getSource()?.getParent()?.getParent()
             let itemSelected = table?.getSelectedItems().length
             if (itemSelected >= 0) {
-                const obj_selected = table.getSelectedItem().getBindingContext("modello").getObject()
-                this.createModel({ ...obj_selected, edit: true, required: true })
+                this.getView().getModel("modello").setProperty("/edit", true)
+                this.getView().getModel("modello").setProperty("/required", true)
+                this.createDialog()
+                // const obj_selected = table.getSelectedItem().getBindingContext("modello").getObject()
+                // this.createModel({ ...obj_selected, edit: true, required: true })
             }
+        },
+        //form
+        createDialog: async function () {
+            const view = this.getView();
+            const self = this
+            const oInnerFragment = await sap.ui.core.Fragment.load({
+                name: "trasfertedirigenti.view.Fragments.FormTrasferta",
+                controller: this
+            });
+            this._oDialog = new sap.m.Dialog({
+                title: "Modifica Trasferta",
+                content: [oInnerFragment],
+                controller: this,
+                beginButton: new sap.m.Button({
+                    type: "Emphasized",
+                    text: "Salva",
+                    press: () => {
+                        self.onSaveChange()
+                        this._oDialog.close();
+                    }
+                }),
+                endButton: new sap.m.Button({
+                    text: "Chiudi",
+                    press: () => {
+                        this._oDialog.close();
+                    }
+                })
+            });
+
+            view.addDependent(this._oDialog);
+
+            this._oDialog.open();
+        },
+        handleCalendarSelect: function (oEvent) {
+            debugger
         },
         ///Prova
         onNavOther: function () {

@@ -5,15 +5,17 @@
     xmlns:u="sap.ui.unified"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
-    <FlexBox direction="Row" wrap="Wrap" class="sapUiContentPadding" fitContainer="true">
-        <u:Calendar id="calendar" startDateChange=".onChangeDateCalendar" showCurrentDateButton="true" nonWorkingDays="0,6" disabledDates="{path: '/disabled'}" months="2" showWeekNumbers="false" singleSelection="true" select="handleCalendarSelect">
+   
+        <u:Calendar id="calendar" width="100%" startDateChange=".onChangeDateCalendar"
+            showCurrentDateButton="true" nonWorkingDays="0,6" disabledDates="{path: '/disabled'}"
+            months="2" showWeekNumbers="false" singleSelection="true" select="handleCalendarSelect">
             <u:disabledDates>
-                <u:DateRange startDate="{start}" endDate="{end}"/>
+                <u:DateRange startDate="{start}" endDate="{end}" />
             </u:disabledDates>
         </u:Calendar>
-        <VBox width="auto" >
+        <!-- <VBox width="auto">
             <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.FormTrasferta" type="XML" />
 
         </VBox>
-    </FlexBox>
+    </FlexBox> -->
 </core:FragmentDefinition>

@@ -37,9 +37,9 @@
             <Label text="Note" />
             <TextArea width="300px" editable="{modello>/edit}" value="{modello>/note}" height="100px" rows="8" />
             <Label text="" />
-            <HBox justifyContent="End" alignItems="Center" width="100%">
+            <!-- <HBox justifyContent="End" alignItems="Center" width="100%">
                 <Button text="Invia" type="Emphasized" icon="sap-icon://save" enabled="{modello>/edit}" press=".onSaveChange"/>
-            </HBox>
+            </HBox> -->
         </f:content>
     </f:SimpleForm>
 </core:FragmentDefinition>

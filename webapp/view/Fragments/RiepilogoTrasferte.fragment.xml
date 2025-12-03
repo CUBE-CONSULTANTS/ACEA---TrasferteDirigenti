@@ -14,7 +14,10 @@
 
 
     </l:Splitter> -->
-    <l:ResponsiveSplitter defaultPane="default">
+    <FlexBox>
+        <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.TableRiepilogo" type="XML" />
+    </FlexBox>
+    <!-- <l:ResponsiveSplitter defaultPane="default">
         <l:PaneContainer>
             <l:SplitPane requiredParentWidth="600">
                 <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.TableRiepilogo" type="XML" />
@@ -23,5 +26,5 @@
                 <core:Fragment fragmentName="trasfertedirigenti.view.Fragments.FormTrasferta" type="XML" />
             </l:SplitPane>
         </l:PaneContainer>
-    </l:ResponsiveSplitter>
+    </l:ResponsiveSplitter> -->
 </core:FragmentDefinition>
