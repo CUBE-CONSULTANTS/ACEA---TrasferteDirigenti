@@ -12,3 +12,7 @@
   filter: blur(1px);
   pointer-events: none !important;
 }
+
+.removeLine{
+  border-bottom: #f0f0f0;
+}

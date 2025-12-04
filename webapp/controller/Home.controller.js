@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     'sap/ui/core/format/DateFormat',
     'sap/ui/core/date/UI5Date',
-    "./BaseController"
+    "./BaseController",
 ], (Controller, DateFormat, UI5Date, BaseController) => {
     "use strict";
 
@@ -15,6 +15,10 @@ sap.ui.define([
         },
         _onRouteMatched: function (oEvent) {
             this.initModel()
+            //
+            this.initCalendar();
+            this.getView().setModel(new sap.ui.model.json.JSONModel({ buttonRiepilogoTrasferte: "calendar" }), "modelloAppoggio")
+            //
             this.createModel({ edit: true, required: true })
         },
         initModel: async function () {
@@ -32,7 +36,6 @@ sap.ui.define([
 
 
         onChangeDateCalendar: async function (oEvent) {
-            debugger
             let year = oEvent.getSource().getStartDate().getFullYear()
             const day = await this.holidays(year)
             var oModel = new sap.ui.model.json.JSONModel();
@@ -72,34 +75,14 @@ sap.ui.define([
             else this.createModel({ edit: false, required: false })
 
         },
-        onSetEdit: function (oEvent) {
-            const bSelected = oEvent.getParameter("selected");
-            if (bSelected) {
-                const oItem = oEvent.getParameter("listItem");
-                const obj_selected = oItem.getBindingContext("modello").getObject();
 
-                this.getView().getModel("modello").setProperty("/tipotrasfertakey", obj_selected.tipotrasfertakey,)
-                this.getView().getModel("modello").setProperty("/data_inizio", obj_selected.data_inizio.replaceAll("-", "/"))
-                this.getView().getModel("modello").setProperty("/data_fine", obj_selected.data_fine.replaceAll("-", "/"))
-                this.getView().getModel("modello").setProperty("/ora_inizio", obj_selected.ora_inizio)
-                this.getView().getModel("modello").setProperty("/ora_fine", obj_selected.ora_fine)
-                this.getView().getModel("modello").setProperty("/nome", obj_selected.text)
-
-
-            } else {
-                this.createModel({ edit: false, required: false })
-            }
-        },
         onChange: function (oEvent) {
-            const table = oEvent.getSource()?.getParent()?.getParent()
-            let itemSelected = table?.getSelectedItems().length
-            if (itemSelected >= 0) {
-                this.getView().getModel("modello").setProperty("/edit", true)
-                this.getView().getModel("modello").setProperty("/required", true)
-                this.createDialog()
-                // const obj_selected = table.getSelectedItem().getBindingContext("modello").getObject()
-                // this.createModel({ ...obj_selected, edit: true, required: true })
-            }
+            this.getView().getModel("modello").setProperty("/edit", true)
+            this.getView().getModel("modello").setProperty("/required", true)
+            const obj_selected = oEvent.getSource().getParent().getBindingContext("modello").getObject()
+            this.createModel({ ...obj_selected, edit: true, required: true })
+            this.createDialog()
+
         },
         //form
         createDialog: async function () {
@@ -110,19 +93,33 @@ sap.ui.define([
                 controller: this
             });
             this._oDialog = new sap.m.Dialog({
-                title: "Modifica Trasferta",
+                customHeader: new sap.m.Bar({
+                    contentLeft: [
+                        new sap.m.Title({ text: "Modifica Trasferta" })
+                    ],
+                    contentRight: [
+                        new sap.m.Button({
+                            icon: "sap-icon://decline",
+                            type: "Transparent",
+                            press: () => {
+                                this._oDialog.close();
+                            }
+                        })
+
+                    ]
+                }),
                 content: [oInnerFragment],
                 controller: this,
-                beginButton: new sap.m.Button({
+                endButton: new sap.m.Button({
                     type: "Emphasized",
                     text: "Salva",
                     press: () => {
-                        self.onSaveChange()
+                        // self?.onSaveChange()
                         this._oDialog.close();
                     }
                 }),
-                endButton: new sap.m.Button({
-                    text: "Chiudi",
+                beginButton: new sap.m.Button({
+                    text: "Elimina",
                     press: () => {
                         this._oDialog.close();
                     }
@@ -130,13 +127,8 @@ sap.ui.define([
             });
 
             view.addDependent(this._oDialog);
-
             this._oDialog.open();
         },
-        ///Prova
-        onNavOther: function () {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("Other");
-        }
+
     });
 });

@@ -34,11 +34,11 @@
         <f:content>
 
         </f:content>
-        <f:footer>
+        <!-- <f:footer>
             <OverflowToolbar >
                 <ToolbarSpacer />
                 <Button text="Planning Calendar" icon="sap-icon://calendar" type="Attention" press=".onNavOther"/>
             </OverflowToolbar>
-        </f:footer>
+        </f:footer> -->
     </f:DynamicPage>
 </mvc:View>

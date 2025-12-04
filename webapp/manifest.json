@@ -77,21 +77,12 @@
           "name": "RouteHome",
           "pattern": ":?query:",
           "target": ["TargetHome"]
-        },
-        {
-          "name": "Other",
-          "pattern": "Other",
-          "target": ["Other"]
         }
       ],
       "targets": {
         "TargetHome": {
           "id": "Home",
           "name": "Home"
-        },
-        "Other": {
-          "id": "Other",
-          "name": "Other"
         }
       }
     },

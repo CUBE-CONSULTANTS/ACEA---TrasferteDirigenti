@@ -2,12 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "sap/ui/core/date/UI5Date",
+    "sap/ui/unified/library",
+    "sap/ui/model/json/JSONModel",
+
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Fragment, UI5Date) {
+    function (Controller, Fragment, UI5Date, unifiedLibrary, JSONModel) {
         "use strict";
+        var CalendarDayType = unifiedLibrary.CalendarDayType;
+
         return Controller.extend("trasfertedirigenti.controller.BaseController", {
             loadFragment: async function (fragmentName) {
                 const fragment = await Fragment.load({
@@ -52,9 +57,9 @@ sap.ui.define([
                         .then(data =>
                             data.response.holidays.map(x => x.date).map(x => x.datetime)
                         )
-                     
+
                 }
-                catch(err){
+                catch (err) {
                     return []
                 }
 
@@ -78,8 +83,8 @@ sap.ui.define([
                             type_trasferta: "AT4",
                             tipotrasfertakey: "TrasfertaDirigenteEstero",
                             tipo_trasferta: "Trasferta Dirigente Estero",
-                            data_inizio: "14-11-2025",
-                            data_fine: "14-11-2025",
+                            data_inizio: "14-12-2025",
+                            data_fine: "14-12-2025",
                             ora_inizio: "09:00:00",
                             ora_fine: "18:00:00"
                         },
@@ -87,8 +92,8 @@ sap.ui.define([
                             type_trasferta: "AT4",
                             tipotrasfertakey: "TrasfertaDirigenteEstero",
                             tipo_trasferta: "Trasferta Dirigente Estero",
-                            data_inizio: "11-12-2023",
-                            data_fine: "11-12-2023",
+                            data_inizio: "11-12-2025",
+                            data_fine: "11-12-2025",
                             ora_inizio: "13:00:00",
                             ora_fine: "20:00:00"
                         },
@@ -96,13 +101,83 @@ sap.ui.define([
                             type_trasferta: "AT2",
                             tipotrasfertakey: "TrasfertaDirigenteItalia",
                             tipo_trasferta: "Trasferta Dirigente Italia",
-                            data_inizio: "04-09-2023",
-                            data_fine: "04-09-2023",
+                            data_inizio: "04-12-2025",
+                            data_fine: "08-12-2025",
                             ora_inizio: "09:00:00",
                             ora_fine: "19:00:00"
                         }
                     ]
                 }), "modello")
-            }
+            },
+            //CALENDAR
+            initCalendar: async function () {
+
+                const oCalendar = this.byId("SPC1");
+                await this.disableHoliday(oCalendar)
+
+                var oModel = new sap.ui.model.json.JSONModel();
+                oModel.setData({
+                    startDate: UI5Date.getInstance(new Date()),
+                    types: (function () {
+                        var aTypes = [];
+                        for (var key in CalendarDayType) {
+                            aTypes.push({
+                                type: CalendarDayType[key]
+                            });
+                        }
+                        return aTypes;
+                    })(),
+                    appointments: [{
+                        title: "Trasferta Dirigente Estero",
+                        type: CalendarDayType.Type01,
+                        startDate: UI5Date.getInstance("2025", "11", "4", "5", "0"),
+                        endDate: UI5Date.getInstance("2025", "11", "8", "6", "0"),
+                        text: ""
+                    }, {
+                        title: "Trasferta Dirigente Estero",
+                        type: CalendarDayType.Type01,
+                        startDate: UI5Date.getInstance("2025", "11", "11", "7", "0"),
+                        endDate: UI5Date.getInstance("2025", "11", "11", "8", "0"),
+                        text: ""
+                    }, {
+                        title: "Trasferta Dirigente Italia",
+                        type: CalendarDayType.Type05,
+                        startDate: UI5Date.getInstance("2025", "11", "14", "10", "0"),
+                        endDate: UI5Date.getInstance("2025", "11", "14", "19", "0"),
+                        text: ""
+                    }
+                    ],
+                    legendItems: [
+                        {
+                            text: "Trasferta Dirigente Estero",
+                            type: "Type01"
+                        },
+                        {
+                            text: "Trasferta Dirigente Estero",
+                            type: "Type05"
+                        }
+                    ],
+                    legendAppointmentItems: [
+                        {
+                            text: "Trasferta Dirigente Estero",
+                            type: CalendarDayType.Type01
+                        },
+                        {
+                            text: "Trasferta Dirigente Italia",
+                            type: CalendarDayType.Type05
+                        },
+                    ],
+                });
+
+                this.getView().setModel(oModel);
+                oModel = new JSONModel();
+                var oStateModel = new JSONModel();
+                oStateModel.setData({
+                    legendShown: false
+                });
+                this.getView().setModel(oStateModel, "stateModel");
+                oModel.setData({ allDay: false });
+                this.getView().setModel(oModel, "allDay");
+            },
         })
     })

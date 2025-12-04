@@ -20,7 +20,6 @@
                 </views>
                 <actions>
                     <ToggleButton pressed="{path: 'stateModel>/legendShown'}" icon="sap-icon://legend" tooltip="Legenda"/>
-                    <Button text="Create" press="handleAppointmentCreate" type="Emphasized" icon="sap-icon://edit" tooltip="Crea nuova trasferta" />
                 </actions>
                 <appointments>
                     <unified:CalendarAppointment title= "{title}" text= "{text}" type= "{type}" icon= "{icon}" startDate= "{startDate}" endDate= "{endDate}">
