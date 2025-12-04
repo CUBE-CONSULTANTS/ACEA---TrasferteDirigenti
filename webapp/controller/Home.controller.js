@@ -18,7 +18,7 @@ sap.ui.define([
             //
             this.initCalendar();
             this.getView().setModel(new sap.ui.model.json.JSONModel({
-                buttonRiepilogoTrasferte: "calendar",
+                buttonRiepilogoTrasferte: "table",
                 filtroTrasferta: "",
                 filtroStart: this._formatStartDate(new Date()),
                 filtroEnd: ""
