@@ -8,14 +8,14 @@
     xmlns:table="sap.ui.table">
     <l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding ColorBack" sideContentVisibility="AlwaysShow" showSideContent="{path: 'stateModel>/legendShown'}" containerQuery="true">
         <VBox >
-            <SinglePlanningCalendar id="SPC1"  appointmentSelect="handleAppointmentSelect" headerDateSelect="handleHeaderDateSelect" startDateChange="handleStartDateChange" class="sapUiSmallMarginTop" title= "Inserimento periodo di trasferta" cellPress=".onCellPress" startDate="{path: '/startDate'}" stickyMode="NavBarAndColHeaders" appointments="{path: '/appointments'}">
+            <SinglePlanningCalendar id="SPC1"  appointmentSelect="handleAppointmentSelect" headerDateSelect="handleHeaderDateSelect" startDateChange="handleStartDateChange" class="sapUiSmallMarginTop" title= "Calendario Trasferte" cellPress=".onCellPress" startDate="{path: '/startDate'}" stickyMode="NavBarAndColHeaders" appointments="{path: '/appointments'}">
                 <specialDates>
                     <unified:DateTypeRange type="NonWorking" startDate="{path: '/Holidays'}">
                     </unified:DateTypeRange>
                 </specialDates>
                 <views>
                     <SinglePlanningCalendarMonthView key="MonthView" title="Mese" />
-                    <SinglePlanningCalendarWeekView key="WeekView" title="Settimana" />
+                    <!-- <SinglePlanningCalendarWeekView key="WeekView" title="Settimana" /> -->
 
                 </views>
                 <actions>

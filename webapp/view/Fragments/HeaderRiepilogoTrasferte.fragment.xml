@@ -12,7 +12,7 @@
         <fb:filterGroupItems>
             <fb:FilterGroupItem name="TipoTrasferta" label="Tipo Trasferta" groupName="Group1" visibleInFilterBar="true">
                 <fb:control>
-                    <Select forceSelection="false" selectedItem="{modello>/tipo_trasferta}" required="{modello>/required}" class="sapUiSmallMarginBottom">
+                    <Select forceSelection="false" selectedKey="{modelloAppoggio>/filtroTrasferta}" class="sapUiSmallMarginBottom">
                         <core:Item text="T2" key="T2" />
                         <core:Item text="T4" key="T4" />
                     </Select>
@@ -20,12 +20,12 @@
             </fb:FilterGroupItem>
             <fb:FilterGroupItem name="start" label="Inizio" groupName="Group1" visibleInFilterBar="true">
                 <fb:control>
-                    <DatePicker editable="{=${modelloAppoggio>/buttonRiepilogoTrasferte} !== 'table' ? false : true }" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Inizio Validità" class="sapUiSmallMarginBottom" />
+                    <DatePicker value="{modelloAppoggio>/filtroStart}" editable="{=${modelloAppoggio>/buttonRiepilogoTrasferte} !== 'table' ? false : true }" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Inizio Validità" class="sapUiSmallMarginBottom" />
                 </fb:control>
             </fb:FilterGroupItem>
             <fb:FilterGroupItem name="end" label="Fine" groupName="Group1" visibleInFilterBar="true">
                 <fb:control>
-                    <DatePicker editable="{=${modelloAppoggio>/buttonRiepilogoTrasferte} !== 'table' ? false : true }" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Fine Validità" class="sapUiSmallMarginBottom" />
+                    <DatePicker value="{modelloAppoggio>/filtroEnd}" editable="{=${modelloAppoggio>/buttonRiepilogoTrasferte} !== 'table' ? false : true }" showCurrentDateButton="true" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" placeholder="Fine Validità" class="sapUiSmallMarginBottom" />
                 </fb:control>
             </fb:FilterGroupItem>
         </fb:filterGroupItems>

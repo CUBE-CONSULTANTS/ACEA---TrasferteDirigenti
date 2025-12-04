@@ -17,7 +17,12 @@ sap.ui.define([
             this.initModel()
             //
             this.initCalendar();
-            this.getView().setModel(new sap.ui.model.json.JSONModel({ buttonRiepilogoTrasferte: "calendar" }), "modelloAppoggio")
+            this.getView().setModel(new sap.ui.model.json.JSONModel({
+                buttonRiepilogoTrasferte: "calendar",
+                filtroTrasferta: "",
+                filtroStart: this._formatStartDate(new Date()),
+                filtroEnd: ""
+            }), "modelloAppoggio")
             //
             this.createModel({ edit: true, required: true })
         },
@@ -83,51 +88,6 @@ sap.ui.define([
             this.createModel({ ...obj_selected, edit: true, required: true })
             this.createDialog()
 
-        },
-        //form
-        createDialog: async function () {
-            const view = this.getView();
-            const self = this
-            const oInnerFragment = await sap.ui.core.Fragment.load({
-                name: "trasfertedirigenti.view.Fragments.FormTrasferta",
-                controller: this
-            });
-            this._oDialog = new sap.m.Dialog({
-                customHeader: new sap.m.Bar({
-                    contentLeft: [
-                        new sap.m.Title({ text: "Modifica Trasferta" })
-                    ],
-                    contentRight: [
-                        new sap.m.Button({
-                            icon: "sap-icon://decline",
-                            type: "Transparent",
-                            press: () => {
-                                this._oDialog.close();
-                            }
-                        })
-
-                    ]
-                }),
-                content: [oInnerFragment],
-                controller: this,
-                endButton: new sap.m.Button({
-                    type: "Emphasized",
-                    text: "Salva",
-                    press: () => {
-                        // self?.onSaveChange()
-                        this._oDialog.close();
-                    }
-                }),
-                beginButton: new sap.m.Button({
-                    text: "Elimina",
-                    press: () => {
-                        this._oDialog.close();
-                    }
-                })
-            });
-
-            view.addDependent(this._oDialog);
-            this._oDialog.open();
         },
 
     });
